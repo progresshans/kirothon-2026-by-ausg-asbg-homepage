@@ -1,0 +1,4 @@
+# Cloudflare Pages 설정 (빌드 없이 public 폴더를 그대로 배포)
+name = "kirothon-2026"
+pages_build_output_dir = "./public"
+compatibility_date = "2026-10-01"
