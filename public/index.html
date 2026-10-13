@@ -87,17 +87,18 @@
     <div class="hero__title-wrap">
       <h1 class="hero__title">
         <span class="sr-only">KIROTHON 2026</span>
-        <svg class="title-svg" viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <!-- 좌표를 원점에서 멀리 둬야 물결이 글자 전체에 고르게 흐름 -->
+        <svg class="title-svg" viewBox="2000 1000 1000 300" preserveAspectRatio="none" aria-hidden="true" focusable="false">
           <defs>
             <filter id="wave" x="-4%" y="-12%" width="108%" height="124%" color-interpolation-filters="sRGB">
-              <feTurbulence type="fractalNoise" baseFrequency="0.0026 0.0065" numOctaves="1" seed="8" result="noise" />
+              <feTurbulence data-noise type="fractalNoise" baseFrequency="0.0026 0.0065" numOctaves="1" seed="8" result="noise" />
               <feDisplacementMap data-wave in="SourceGraphic" in2="noise" scale="52" xChannelSelector="R" yChannelSelector="G" result="warp" />
               <!-- 변형 후 생기는 계단 현상을 부드럽게 -->
               <feGaussianBlur in="warp" stdDeviation="0.9" />
               <feComponentTransfer><feFuncA type="table" tableValues="0 0 1 1" /></feComponentTransfer>
             </filter>
           </defs>
-          <text class="title-svg__text" x="6" y="286" textLength="988" lengthAdjust="spacingAndGlyphs" filter="url(#wave)">KIROTHON</text>
+          <text class="title-svg__text" x="2006" y="1286" textLength="988" lengthAdjust="spacingAndGlyphs" filter="url(#wave)">KIROTHON</text>
         </svg>
       </h1>
       <p class="scribble scribble--next" aria-hidden="true">

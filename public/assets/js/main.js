@@ -118,22 +118,52 @@
     reveals.forEach((el) => el.removeAttribute("data-reveal"));
   }
 
-  /* ---------- 타이틀 물결 인트로 ---------- */
+  /* ---------- 타이틀 물결: 크게 일렁이며 등장 → 계속 흐름, 마우스를 올리면 크게 ---------- */
   const wave = $("[data-wave]");
-  if (wave && !reduceMotion) {
-    const to = Number(wave.getAttribute("scale"));
-    const from = 260;
-    const dur = 1600;
-    let t0;
-    const ease = (t) => 1 - Math.pow(1 - t, 4);
-    const step = (now) => {
-      t0 ??= now;
-      const t = Math.min(1, (now - t0) / dur);
-      wave.setAttribute("scale", (from + (to - from) * ease(t)).toFixed(1));
-      if (t < 1) requestAnimationFrame(step);
+  const noise = $("[data-noise]");
+  const title = $(".hero__title");
+  if (wave && noise && title && !reduceMotion) {
+    const BASE = Number(wave.getAttribute("scale"));
+    const [fx, fy] = noise.getAttribute("baseFrequency").split(/\s+/).map(Number);
+    let amp = 260; // 등장할 때의 진폭
+    let energy = 0; // 0 = 평소, 1 = 마우스를 올렸을 때
+    let energyTarget = 0;
+    let phase = 0;
+    let inView = true;
+    let raf = 0;
+    let last = 0;
+
+    const frame = (now) => {
+      raf = 0;
+      if (!inView || document.hidden) return;
+      raf = requestAnimationFrame(frame);
+      if (now - last < 33) return; // 30fps면 충분 (필터 렌더링 비용 절약)
+      const dt = Math.min(0.1, (now - last) / 1000);
+      last = now;
+      const ease = (k) => 1 - Math.exp(-dt * k);
+      energy += (energyTarget - energy) * ease(3);
+      phase += dt * (1 + energy * 2.5); // 마우스를 올리면 흐름이 빨라짐
+      amp += (BASE * (1 + energy * 1.5) - amp) * ease(2.2); // 마우스를 올리면 물결이 커짐
+      wave.setAttribute("scale", (amp + Math.sin(phase * 1.7) * 8).toFixed(1));
+      noise.setAttribute(
+        "baseFrequency",
+        `${(fx + Math.sin(phase * 0.6) * 0.00022).toFixed(6)} ${(fy + Math.sin(phase * 0.5 + 1) * 0.0005).toFixed(6)}`
+      );
     };
-    wave.setAttribute("scale", from);
-    requestAnimationFrame(step);
+    const start = () => (raf ||= requestAnimationFrame(frame));
+
+    title.addEventListener("pointerenter", () => (energyTarget = 1));
+    title.addEventListener("pointerleave", () => (energyTarget = 0));
+    // 화면 밖이거나 탭이 숨겨지면 멈춤
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(([entry]) => {
+        inView = entry.isIntersecting;
+        if (inView) start();
+      }).observe(title);
+    }
+    document.addEventListener("visibilitychange", () => !document.hidden && start());
+    wave.setAttribute("scale", amp);
+    start();
   }
 
   /* ---------- 고스트: 눈동자가 포인터를 따라감 ---------- */
