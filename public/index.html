@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>KIROTHON 2026 — Hackathon using Kiro</title>
+  <meta name="description" content="2026.11.14, Kiro와 함께 아이디어를 진짜로 만드는 해커톤. 1~4인 팀으로 참가하세요." />
+  <meta name="theme-color" content="#8A44FF" />
+
+  <!--
+    참가 신청 구글폼 주소를 content에 넣으면 페이지의 모든 '참가 신청' 버튼이 활성화됩니다.
+    비워 두면 버튼이 '신청 오픈 예정' 상태로 표시됩니다.
+  -->
+  <meta name="kirothon:apply-url" content="" />
+
+  <!-- 배포 도메인이 정해지면 og:url / og:image를 절대 경로(https://...)로 바꿔 주세요. -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="KIROTHON 2026 — Hackathon using Kiro" />
+  <meta property="og:description" content="2026.11.14, Kiro와 함께 아이디어를 진짜로 만드는 해커톤. 1~4인 팀으로 참가하세요." />
+  <meta property="og:image" content="/assets/img/og.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&family=IBM+Plex+Mono:wght@400;500;600&family=Permanent+Marker&display=swap" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <script src="/assets/js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#about">본문으로 건너뛰기</a>
+
+  <!-- 재사용 아이콘 -->
+  <svg width="0" height="0" class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-ghost" viewBox="84 58 232 282">
+      <path fill="var(--ghost-body, #fff)" d="M210 64C262 64 300 100 308 150C315 200 306 262 284 296C268 322 246 335 228 334C216 333 211 324 207 316C197 326 178 335 155 334C134 333 122 318 125 300C126 290 130 281 132 275C120 279 104 282 95 276C86 270 88 254 95 244C104 230 108 215 110 196C113 160 116 130 130 108C148 80 178 64 210 64Z" />
+      <ellipse fill="var(--ghost-eye, #000)" cx="214" cy="161" rx="13" ry="21" />
+      <ellipse fill="var(--ghost-eye, #000)" cx="260" cy="161" rx="13" ry="21" />
+    </symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24">
+      <path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square" />
+    </symbol>
+    <symbol id="i-arrow-ne" viewBox="0 0 24 24">
+      <path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square" />
+    </symbol>
+  </svg>
+
+  <!-- 스크롤하면 나타나는 상단 바 -->
+  <nav class="nav" data-nav aria-label="주요 메뉴">
+    <a class="nav__brand" href="#top" aria-label="KIROTHON 2026 맨 위로">
+      <svg class="nav__ghost" aria-hidden="true"><use href="#i-ghost" /></svg>
+      <span>KIROTHON</span><span class="nav__year">2026</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="#about">소개</a></li>
+      <li><a href="#info">행사 정보</a></li>
+      <li><a href="#flow">진행 방식</a></li>
+      <li><a href="#schedule">일정</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div class="nav__right">
+      <span class="chip" data-dday>D-32</span>
+      <a class="btn btn--ink btn--sm" href="#apply" data-apply>
+        <span data-apply-label>신청 오픈 예정</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- ───────── HERO ───────── -->
+  <header class="hero" id="top">
+    <img class="star star--hero-a" src="/assets/img/star-a.svg" alt="" aria-hidden="true" />
+    <img class="star star--hero-b" src="/assets/img/star-b.svg" alt="" aria-hidden="true" />
+
+    <div class="hero__top mono">
+      <p class="hero__stack">Ideas<br />People<br />Prompts<br />Real things</p>
+      <p class="hero__spaced">Build<br />with<br />Kiro</p>
+      <p class="hero__tagline"><span class="dash" aria-hidden="true"></span>A brighter idea tomorrow might start here.</p>
+    </div>
+
+    <div class="hero__title-wrap">
+      <h1 class="hero__title">
+        <span class="sr-only">KIROTHON 2026</span>
+        <svg class="title-svg" viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+          <defs>
+            <filter id="wave" x="-4%" y="-12%" width="108%" height="124%" color-interpolation-filters="sRGB">
+              <feTurbulence type="fractalNoise" baseFrequency="0.0026 0.0065" numOctaves="1" seed="8" result="noise" />
+              <feDisplacementMap data-wave in="SourceGraphic" in2="noise" scale="52" xChannelSelector="R" yChannelSelector="G" result="warp" />
+              <!-- 변형 후 생기는 계단 현상을 부드럽게 -->
+              <feGaussianBlur in="warp" stdDeviation="0.9" />
+              <feComponentTransfer><feFuncA type="table" tableValues="0 0 1 1" /></feComponentTransfer>
+            </filter>
+          </defs>
+          <text class="title-svg__text" x="6" y="286" textLength="988" lengthAdjust="spacingAndGlyphs" filter="url(#wave)">KIROTHON</text>
+        </svg>
+      </h1>
+      <p class="scribble scribble--next" aria-hidden="true">
+        Build<br />what's<br />next
+        <svg viewBox="0 0 200 24" class="scribble__line"><path d="M4 18C58 8 128 4 196 9" /></svg>
+      </p>
+    </div>
+
+    <div class="hero__body">
+      <p class="hero__sub">Hackathon using Kiro</p>
+      <div class="hero__date-row">
+        <p class="hero__date"><time datetime="2026-11-14">2026.11.14</time></p>
+        <p class="hero__meta">
+          <span class="chip">SAT</span>
+          <span class="chip chip--ink" data-dday>D-32</span>
+        </p>
+      </div>
+      <p class="hero__flow mono" aria-label="Ideas, Build, Share, Together">
+        Ideas <span aria-hidden="true">→</span> Build <span aria-hidden="true">→</span> Share <span aria-hidden="true">→</span> Together
+      </p>
+      <p class="hero__lead">Kiro와 함께 아이디어를 진짜로 만드는 해커톤. <br class="br-mobile" />1~4인 팀으로 참가하세요.</p>
+      <div class="hero__cta">
+        <a class="btn btn--ink" href="#apply" data-apply>
+          <span data-apply-label>신청 오픈 예정</span>
+          <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow-ne" /></svg>
+        </a>
+        <a class="btn btn--line" href="#about">
+          행사 알아보기
+          <svg class="btn__icon btn__icon--down" aria-hidden="true"><use href="#i-arrow" /></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero__ghost" aria-hidden="true">
+      <svg class="ghost" viewBox="84 58 232 282" data-ghost>
+        <path class="ghost__body" d="M210 64C262 64 300 100 308 150C315 200 306 262 284 296C268 322 246 335 228 334C216 333 211 324 207 316C197 326 178 335 155 334C134 333 122 318 125 300C126 290 130 281 132 275C120 279 104 282 95 276C86 270 88 254 95 244C104 230 108 215 110 196C113 160 116 130 130 108C148 80 178 64 210 64Z" />
+        <g data-eyes>
+          <g class="ghost__blink">
+            <ellipse cx="214" cy="161" rx="13" ry="21" />
+            <ellipse cx="260" cy="161" rx="13" ry="21" />
+          </g>
+        </g>
+      </svg>
+      <div class="ghost-bubble" data-bubble></div>
+      <p class="sticker sticker--sleep">Ideas<br />don't sleep</p>
+    </div>
+
+  </header>
+
+  <!-- ───────── MARQUEE ───────── -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <div class="marquee__group">
+        <span>Ideas don't sleep</span><i>✱</i>
+        <span>Build what's next</span><i>✱</i>
+        <span>Good ideas haunt the future</span><i>✱</i>
+        <span>Same tools, different possibilities</span><i>✱</i>
+      </div>
+      <div class="marquee__group">
+        <span>Ideas don't sleep</span><i>✱</i>
+        <span>Build what's next</span><i>✱</i>
+        <span>Good ideas haunt the future</span><i>✱</i>
+        <span>Same tools, different possibilities</span><i>✱</i>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- ───────── 01 ABOUT ───────── -->
+    <section class="section about" id="about" aria-labelledby="about-title">
+      <div class="wrap">
+        <div class="sec-head" data-reveal>
+          <p class="sec-head__idx mono"><span>01</span> About</p>
+          <h2 class="sec-head__title" id="about-title">프롬프트에서<br />진짜 결과물까지</h2>
+        </div>
+
+        <div class="about__grid">
+          <div class="about__text" data-reveal>
+            <p class="lead">KIROTHON은 AI 개발 도구 <strong>Kiro</strong>를 활용해 아이디어를 실제로 동작하는 결과물로 만들어 보는 해커톤입니다.</p>
+            <p>머릿속 아이디어를 프롬프트로 꺼내고, Kiro와 함께 스펙을 다듬고, 에이전트와 함께 설계하고 구현해 보세요. 같은 도구를 쥐고도 팀마다 전혀 다른 결과물이 나올 거예요. 그 다양한 가능성을 한자리에서 만나는 것이 KIROTHON의 목표입니다.</p>
+          </div>
+
+          <aside class="kiro-card" data-reveal aria-labelledby="kiro-card-title">
+            <div class="kiro-card__head">
+              <svg class="kiro-card__ghost" aria-hidden="true"><use href="#i-ghost" /></svg>
+              <p class="mono" id="kiro-card-title">What is Kiro?</p>
+            </div>
+            <p>Kiro는 AWS가 만든 에이전트형 AI 개발 도구예요. 자연어로 설명한 아이디어를 <b>요구사항 · 설계 · 작업 목록</b>으로 정리하는 스펙 기반 개발(Spec-driven development), 반복 작업을 자동화하는 에이전트 훅(Agent Hooks) 같은 기능으로 프로토타입을 넘어 실제로 쓸 수 있는 결과물까지 함께 만들어 갑니다.</p>
+            <a class="link-arrow" href="https://kiro.dev" target="_blank" rel="noopener noreferrer">
+              kiro.dev 둘러보기 <svg aria-hidden="true"><use href="#i-arrow-ne" /></svg>
+            </a>
+          </aside>
+        </div>
+
+        <ol class="pillars">
+          <li class="pillar" data-reveal>
+            <span class="pillar__no mono">01</span>
+            <p class="pillar__en">Ideas</p>
+            <p class="pillar__ko">아이디어</p>
+            <p class="pillar__desc">엉뚱해도 좋아요. 모든 결과물은 하나의 아이디어에서 시작해요.</p>
+          </li>
+          <li class="pillar" data-reveal>
+            <span class="pillar__no mono">02</span>
+            <p class="pillar__en">People</p>
+            <p class="pillar__ko">사람</p>
+            <p class="pillar__desc">1~4인의 팀, 그리고 같은 날 같은 자리에 모인 빌더들.</p>
+          </li>
+          <li class="pillar" data-reveal>
+            <span class="pillar__no mono">03</span>
+            <p class="pillar__en">Prompts</p>
+            <p class="pillar__ko">프롬프트</p>
+            <p class="pillar__desc">말로 설명하고, 스펙으로 다듬고, 에이전트와 함께 만들어요.</p>
+          </li>
+          <li class="pillar" data-reveal>
+            <span class="pillar__no mono">04</span>
+            <p class="pillar__en">Real things</p>
+            <p class="pillar__ko">진짜 결과물</p>
+            <p class="pillar__desc">데모로 보여줄 수 있는, 실제로 동작하는 무언가.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ───────── BUILDERS ───────── -->
+    <section class="section builders" aria-labelledby="builders-title">
+      <img class="star star--builders" src="/assets/img/star-a.svg" alt="" aria-hidden="true" />
+      <div class="wrap builders__grid">
+        <div class="builders__text" data-reveal>
+          <p class="mono eyebrow">For curious builders everywhere</p>
+          <h2 class="builders__title" id="builders-title">같은 도구,<br />다른 가능성.</h2>
+          <p>코드를 쓰는 사람도, 화면을 그리는 사람도, 지루한 일을 자동화하고 싶은 사람도. Kiro라는 같은 도구로 각자의 방식대로 만들어 보세요.</p>
+          <p class="note">※ 정확한 참가 대상은 추후 공지됩니다.</p>
+        </div>
+        <ul class="words" aria-label="Code, Design, Automate, Collaborate, Repeat">
+          <li data-reveal><span class="words__en">Code</span><span class="words__ko mono">코드</span></li>
+          <li data-reveal><span class="words__en">Design</span><span class="words__ko mono">디자인</span></li>
+          <li data-reveal><span class="words__en">Automate</span><span class="words__ko mono">자동화</span></li>
+          <li data-reveal><span class="words__en">Collaborate</span><span class="words__ko mono">협업</span></li>
+          <li data-reveal><span class="words__en">Repeat</span><span class="words__ko mono">반복</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ───────── 02 INFO ───────── -->
+    <!-- 확정되면 class="tba" 부분을 실제 값으로 바꿔 주세요. -->
+    <section class="section info" id="info" aria-labelledby="info-title">
+      <div class="wrap">
+        <div class="sec-head" data-reveal>
+          <p class="sec-head__idx mono"><span>02</span> Info</p>
+          <h2 class="sec-head__title" id="info-title">행사 개요</h2>
+        </div>
+
+        <dl class="info-grid">
+          <div class="info-cell" data-reveal>
+            <dt class="mono">Date <span>일시</span></dt>
+            <dd>
+              <p class="info-cell__value">11.14<small>SAT</small></p>
+              <p class="info-cell__note">2026년 11월 14일 토요일<br />세부 시간은 추후 공개</p>
+            </dd>
+          </div>
+          <div class="info-cell" data-reveal>
+            <dt class="mono">Place <span>장소</span></dt>
+            <dd>
+              <p class="info-cell__value tba">TBA</p>
+              <p class="info-cell__note">장소는 추후 공개됩니다</p>
+            </dd>
+          </div>
+          <div class="info-cell" data-reveal>
+            <dt class="mono">Team <span>팀 구성</span></dt>
+            <dd>
+              <p class="info-cell__value">1–4<small>명</small></p>
+              <p class="info-cell__note">개인 또는 최대 4인 팀으로 참가</p>
+            </dd>
+          </div>
+          <div class="info-cell" data-reveal>
+            <dt class="mono">For <span>참가 대상</span></dt>
+            <dd>
+              <p class="info-cell__value tba">TBA</p>
+              <p class="info-cell__note">참가 대상은 추후 공개됩니다</p>
+            </dd>
+          </div>
+          <div class="info-cell" data-reveal>
+            <dt class="mono">Theme <span>주제</span></dt>
+            <dd>
+              <p class="info-cell__value tba">TBA</p>
+              <p class="info-cell__note">해커톤 주제는 추후 공개됩니다</p>
+            </dd>
+          </div>
+          <div class="info-cell info-cell--apply" data-reveal>
+            <dt class="mono">Apply <span>참가 신청</span></dt>
+            <dd>
+              <p class="info-cell__value info-cell__value--sm">Google Form</p>
+              <a class="btn btn--purple btn--sm" href="#apply" data-apply>
+                <span data-apply-label>신청 오픈 예정</span>
+                <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow-ne" /></svg>
+              </a>
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ───────── 03 FLOW ───────── -->
+    <section class="section flow" id="flow" aria-labelledby="flow-title">
+      <div class="wrap">
+        <div class="sec-head sec-head--dark" data-reveal>
+          <p class="sec-head__idx mono"><span>03</span> How it works</p>
+          <h2 class="sec-head__title" id="flow-title">이렇게 진행돼요</h2>
+        </div>
+
+        <ol class="steps">
+          <li class="step" data-reveal>
+            <span class="step__no mono">Step 01</span>
+            <p class="step__en">Ideas</p>
+            <h3 class="step__ko">아이디어 모으기</h3>
+            <p class="step__desc">1~4인 팀을 꾸리고, 함께 만들고 싶은 것을 정의해요.</p>
+          </li>
+          <li class="step" data-reveal>
+            <span class="step__no mono">Step 02</span>
+            <p class="step__en">Build</p>
+            <h3 class="step__ko">Kiro와 만들기</h3>
+            <p class="step__desc">Kiro와 함께 스펙을 쓰고, 에이전트와 함께 설계하고 구현해요.</p>
+          </li>
+          <li class="step" data-reveal>
+            <span class="step__no mono">Step 03</span>
+            <p class="step__en">Share</p>
+            <h3 class="step__ko">결과 공유하기</h3>
+            <p class="step__desc">만든 결과물을 보여주고, 만드는 과정에서 배운 것을 나눠요.</p>
+          </li>
+          <li class="step" data-reveal>
+            <span class="step__no mono">Step 04</span>
+            <p class="step__en">Together</p>
+            <h3 class="step__ko">함께 축하하기</h3>
+            <p class="step__desc">서로의 가능성을 응원하고, 다음에 만들 것을 함께 그려요.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ───────── 04 SCHEDULE ───────── -->
+    <section class="section schedule" id="schedule" aria-labelledby="schedule-title">
+      <div class="wrap">
+        <div class="sec-head" data-reveal>
+          <p class="sec-head__idx mono"><span>04</span> Schedule</p>
+          <h2 class="sec-head__title" id="schedule-title">일정</h2>
+        </div>
+
+        <ol class="timeline">
+          <li class="timeline__row" data-reveal>
+            <p class="timeline__date tba">TBA</p>
+            <div class="timeline__body">
+              <h3>참가 신청 접수</h3>
+              <p>구글 폼으로 신청을 받아요. 모집 기간은 추후 공개됩니다.</p>
+            </div>
+          </li>
+          <li class="timeline__row" data-reveal>
+            <p class="timeline__date tba">TBA</p>
+            <div class="timeline__body">
+              <h3>주제 · 참가 대상 공개</h3>
+              <p>확정되는 대로 이 페이지를 통해 공지됩니다.</p>
+            </div>
+          </li>
+          <li class="timeline__row timeline__row--main" data-reveal>
+            <p class="timeline__date">11.14 <small>SAT</small></p>
+            <div class="timeline__body">
+              <h3>KIROTHON 2026</h3>
+              <p>해커톤 당일! 세부 타임테이블은 추후 공개됩니다.</p>
+            </div>
+            <svg class="timeline__ghost" aria-hidden="true"><use href="#i-ghost" /></svg>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ───────── 05 FAQ ───────── -->
+    <section class="section faq" id="faq" aria-labelledby="faq-title">
+      <div class="wrap faq__grid">
+        <div class="sec-head" data-reveal>
+          <p class="sec-head__idx mono"><span>05</span> FAQ</p>
+          <h2 class="sec-head__title" id="faq-title">자주 묻는<br />질문</h2>
+        </div>
+
+        <div class="faq__list">
+          <details class="qa" data-reveal>
+            <summary>팀은 어떻게 구성하나요?</summary>
+            <div class="qa__a"><p>1인부터 최대 4인까지 팀으로 참가할 수 있어요. 혼자 참가하는 것도 가능해요.</p></div>
+          </details>
+          <details class="qa" data-reveal>
+            <summary>신청은 어떻게 하나요?</summary>
+            <div class="qa__a"><p>이 페이지의 ‘참가 신청’ 버튼을 눌러 구글 폼으로 신청해 주세요. 모집 기간은 추후 공지됩니다.</p></div>
+          </details>
+          <details class="qa" data-reveal>
+            <summary>해커톤 주제와 참가 대상은 무엇인가요?</summary>
+            <div class="qa__a"><p>현재 확정 중이에요. 정해지는 대로 이 페이지를 통해 공개할게요.</p></div>
+          </details>
+          <details class="qa" data-reveal>
+            <summary>Kiro를 처음 써 봐도 괜찮을까요?</summary>
+            <div class="qa__a"><p>행사 전에 <a href="https://kiro.dev" target="_blank" rel="noopener noreferrer">kiro.dev</a>에서 Kiro를 미리 설치하고 사용해 보시는 걸 추천해요. 당일 훨씬 빠르게 시작할 수 있어요.</p></div>
+          </details>
+          <details class="qa" data-reveal>
+            <summary>무엇을 준비해야 하나요?</summary>
+            <div class="qa__a"><p>노트북과 만들고 싶은 아이디어면 충분해요. 자세한 준비 사항은 추후 안내드릴게요.</p></div>
+          </details>
+          <details class="qa" data-reveal>
+            <summary>궁금한 점은 어디로 문의하나요?</summary>
+            <div class="qa__a"><p>문의 채널은 추후 공개됩니다.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────── 06 PARTNERS ───────── -->
+    <section class="section partners" id="partners" aria-labelledby="partners-title">
+      <div class="wrap">
+        <div class="sec-head sec-head--dark" data-reveal>
+          <p class="sec-head__idx mono"><span>06</span> Partners</p>
+          <h2 class="sec-head__title" id="partners-title">주최 · 후원</h2>
+        </div>
+
+        <div class="partners__grid">
+          <div class="partner-group" data-reveal>
+            <p class="partner-group__label mono">Organized by</p>
+            <ul class="partner-list">
+              <li class="partner">
+                <img class="partner__logo--ausg" src="/assets/img/partners/ausg.png" width="416" height="461" alt="AUSG" />
+              </li>
+              <li class="partner">
+                <div class="asbg-logo" role="img" aria-label="AWS Student Builder Group">
+                  <svg viewBox="0 0 9 9" aria-hidden="true">
+                    <path fill="#FF9900" d="M2 0H3V1H4V0H5V1H6V0H7V2H2ZM2 7H7V9H6V8H5V9H4V8H3V9H2ZM0 2H2V7H0V6H1V5H0V4H1V3H0ZM7 2H9V3H8V4H9V5H8V6H9V7H7Z" />
+                  </svg>
+                  <span aria-hidden="true">AWS Student<br />Builder Group</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="partner-group" data-reveal>
+            <p class="partner-group__label mono">Sponsored by</p>
+            <ul class="partner-list">
+              <li class="partner">
+                <img class="partner__logo--aws" src="/assets/img/partners/aws.png" width="520" height="313" alt="AWS (Amazon Web Services)" />
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────── CTA ───────── -->
+    <section class="section cta" id="apply" aria-labelledby="cta-title">
+      <img class="star star--cta" src="/assets/img/star-b.svg" alt="" aria-hidden="true" />
+      <div class="wrap cta__inner">
+        <h2 class="cta__title" id="cta-title" data-reveal>Ideas<br />don't<br />sleep.</h2>
+        <div class="cta__side" data-reveal>
+          <p class="scribble scribble--cta" aria-hidden="true">see you on 11.14!</p>
+          <p class="cta__lead">11월 14일, Kiro와 함께<br />다음을 만들어요.</p>
+          <div class="countdown" data-countdown aria-label="행사까지 남은 시간">
+            <div><span data-cd="d">--</span><small class="mono">Days</small></div>
+            <div><span data-cd="h">--</span><small class="mono">Hrs</small></div>
+            <div><span data-cd="m">--</span><small class="mono">Min</small></div>
+            <div><span data-cd="s">--</span><small class="mono">Sec</small></div>
+          </div>
+          <a class="btn btn--ink btn--lg" href="#apply" data-apply>
+            <span data-apply-label>신청 오픈 예정</span>
+            <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow-ne" /></svg>
+          </a>
+        </div>
+      </div>
+      <span class="cta__sentinel" aria-hidden="true"></span>
+      <!-- 좌우 반전된 고스트가 오른쪽 아래에서 빼꼼 -->
+      <div class="cta__ghost" aria-hidden="true">
+        <svg class="ghost" viewBox="84 58 232 282" data-ghost>
+          <path class="ghost__body" transform="matrix(-1 0 0 1 400 0)" d="M210 64C262 64 300 100 308 150C315 200 306 262 284 296C268 322 246 335 228 334C216 333 211 324 207 316C197 326 178 335 155 334C134 333 122 318 125 300C126 290 130 281 132 275C120 279 104 282 95 276C86 270 88 254 95 244C104 230 108 215 110 196C113 160 116 130 130 108C148 80 178 64 210 64Z" />
+          <g data-eyes>
+            <g class="ghost__blink">
+              <ellipse cx="186" cy="161" rx="13" ry="21" />
+              <ellipse cx="140" cy="161" rx="13" ry="21" />
+            </g>
+          </g>
+        </svg>
+        <p class="cta__psst">psst!</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ───────── FOOTER ───────── -->
+  <footer class="footer">
+    <div class="wrap footer__grid">
+      <div class="footer__brand">
+        <svg class="footer__ghost" aria-hidden="true"><use href="#i-ghost" /></svg>
+        <p class="footer__name">KIROTHON<span>2026</span></p>
+        <p class="mono">Kiro community hackathon 2026</p>
+      </div>
+      <div class="footer__meta mono">
+        <p>Organized by<br /><strong>AUSG × ASBG</strong></p>
+        <p>Sponsored by<br /><strong>AWS</strong></p>
+        <p><a href="https://kiro.dev" target="_blank" rel="noopener noreferrer">kiro.dev ↗</a></p>
+      </div>
+      <div class="footer__end mono">
+        <p>A more open<br />tomorrow</p>
+        <span class="barcode" aria-hidden="true"></span>
+        <p class="footer__copy">© 2026 KIROTHON</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" role="status" aria-live="polite" data-toast></div>
+</body>
+</html>
