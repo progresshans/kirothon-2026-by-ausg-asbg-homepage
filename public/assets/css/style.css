@@ -844,6 +844,15 @@ svg {
   }
 }
 
+/* 아주 작은 화면(360px 이하): 칩이 날짜 아래로 내려가므로 가로로 나란히 */
+@media (max-width: 360px) {
+  .hero__meta {
+    grid-auto-flow: column;
+    padding-bottom: 0;
+    margin-top: 6px;
+  }
+}
+
 /* ==========================================================================
    MARQUEE
    ========================================================================== */
@@ -1534,12 +1543,6 @@ svg {
   font-size: 16px;
 }
 
-.timeline__body .timeline__note {
-  margin-top: 4px;
-  font-size: 14px;
-  opacity: 0.72;
-}
-
 /* 11.14 당일 타임테이블: 위 일정과 같은 2열 구성 */
 .day {
   display: grid;
@@ -1596,7 +1599,6 @@ svg {
 .day__note {
   grid-column: 2;
   font-size: 14px;
-  opacity: 0.72;
 }
 
 .timeline__row--main {
@@ -2134,7 +2136,7 @@ svg {
 }
 
 .footer__copy {
-  opacity: 0.7;
+  color: var(--purple-soft);
 }
 
 @media (max-width: 760px) {

@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  const EVENT_START = new Date("2026-11-14T00:00:00+09:00");
+  const EVENT_START = new Date("2026-11-14T10:00:00+09:00"); // 입장 시작 시각 (카운트다운 기준)
   const APPLY_DEADLINE = new Date("2026-11-09T23:59:59+09:00"); // 11월 9일(월) 하루 끝까지 신청 가능
   const DAY = 86400000;
   // KST 기준 날짜 번호 (D-day 계산용)

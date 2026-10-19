@@ -36,6 +36,53 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
   <link rel="stylesheet" href="/assets/css/style.css" />
   <script src="/assets/js/main.js" defer></script>
+
+  <!-- 구글 검색 결과에 행사 정보(날짜·장소·주최)를 보여 주기 위한 구조화 데이터 -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "KIROTHON 2026",
+      "description": "Turn your idea into reality. Kiro와 함께 아이디어를 진짜로 만드는 해커톤. 1~4인 팀으로 참가하세요.",
+      "startDate": "2026-11-14T10:00:00+09:00",
+      "endDate": "2026-11-14T20:50:00+09:00",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "location": {
+        "@type": "Place",
+        "name": "CENTERFIELD EAST 12F, AWS Korea",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "테헤란로 231 센터필드 EAST 12층",
+          "addressLocality": "강남구",
+          "addressRegion": "서울특별시",
+          "addressCountry": "KR"
+        }
+      },
+      "image": [
+        "https://kirothon.ausg.me/assets/img/og.jpg"
+      ],
+      "url": "https://kirothon.ausg.me/",
+      "organizer": [
+        {
+          "@type": "Organization",
+          "name": "AUSG"
+        },
+        {
+          "@type": "Organization",
+          "name": "AWS Student Builder Group"
+        },
+        {
+          "@type": "Organization",
+          "name": "AWSKRUG"
+        }
+      ],
+      "sponsor": {
+        "@type": "Organization",
+        "name": "Amazon Web Services"
+      }
+    }
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#about">본문으로 건너뛰기</a>
@@ -242,7 +289,6 @@
     </section>
 
     <!-- ───────── 02 INFO ───────── -->
-    <!-- 확정되면 class="tba" 부분을 실제 값으로 바꿔 주세요. -->
     <section class="section info" id="info" aria-labelledby="info-title">
       <div class="wrap">
         <div class="sec-head" data-reveal>
@@ -357,8 +403,7 @@
             <p class="timeline__date">11.09 <small>MON</small></p>
             <div class="timeline__body">
               <h3>신청 마감 · 참가 확정</h3>
-              <p>11월 9일(월)까지 신청을 받고, 참가 확정도 이날까지 마무리돼요.</p>
-              <p class="timeline__note">참가 확정 메일은 신청 기간 동안 순차적으로 보내드릴 예정이에요.</p>
+              <p>참가 확정 메일은 신청 기간 동안 순차적으로 보내드릴 예정이에요.</p>
             </div>
           </li>
           <li class="timeline__row timeline__row--main" data-reveal>
@@ -433,28 +478,24 @@
 
         <div class="faq__list">
           <details class="qa" data-reveal>
-            <summary>팀은 어떻게 구성하나요?</summary>
-            <div class="qa__a"><p>1인부터 최대 4인까지 팀으로 참가할 수 있어요. 혼자 참가하는 것도 가능해요.</p></div>
+            <summary>혼자서도 참가할 수 있나요?</summary>
+            <div class="qa__a"><p>네, 혼자 참가할 수 있어요. 팀으로 참가한다면 최대 4명까지 함께할 수 있어요.</p></div>
           </details>
           <details class="qa" data-reveal>
-            <summary>신청은 어떻게 하나요?</summary>
-            <div class="qa__a"><p>이 페이지의 ‘참가 신청’ 버튼을 눌러 구글 폼으로 신청해 주세요. 신청은 11월 9일(월)에 마감돼요.</p></div>
-          </details>
-          <details class="qa" data-reveal>
-            <summary>해커톤 주제는 무엇인가요?</summary>
-            <div class="qa__a"><p>주제는 해커톤 당일 오프닝(10:40)에서 공개돼요.</p></div>
-          </details>
-          <details class="qa" data-reveal>
-            <summary>참가 대상은 누구인가요?</summary>
-            <div class="qa__a"><p>Kiro와 함께 뭔가 만들어 보는 하루가 궁금한 분이라면 신청해 주세요.</p></div>
+            <summary>참가 확정은 어떻게 알 수 있나요?</summary>
+            <div class="qa__a"><p>신청 기간 동안 참가 확정 메일을 순차적으로 보내드리고, 11월 9일(월)까지 모두 확정돼요. 메일을 받지 못하셨다면 문의 메일로 알려 주세요.</p></div>
           </details>
           <details class="qa" data-reveal>
             <summary>Kiro를 처음 써 봐도 괜찮을까요?</summary>
-            <div class="qa__a"><p>행사 전에 <a href="https://kiro.dev" target="_blank" rel="noopener noreferrer">kiro.dev</a>에서 Kiro를 미리 설치하고 사용해 보시는 걸 추천해요. 당일 훨씬 빠르게 시작할 수 있어요.</p></div>
+            <div class="qa__a"><p>행사 전에 <a href="https://kiro.dev" target="_blank" rel="noopener noreferrer">kiro.dev</a>에서 Kiro를 미리 설치하고 로그인까지 해 두시는 걸 추천해요. 당일 훨씬 빠르게 시작할 수 있어요.</p></div>
           </details>
           <details class="qa" data-reveal>
             <summary>무엇을 준비해야 하나요?</summary>
-            <div class="qa__a"><p>노트북과 만들고 싶은 아이디어면 충분해요. 자세한 준비 사항은 추후 안내드릴게요.</p></div>
+            <div class="qa__a"><p>노트북과 만들고 싶은 아이디어면 충분해요. 자세한 준비 사항은 참가 확정 메일로 안내드릴게요.</p></div>
+          </details>
+          <details class="qa" data-reveal>
+            <summary>식사는 제공되나요?</summary>
+            <div class="qa__a"><p>네, 당일 점심과 저녁을 제공해 드려요.</p></div>
           </details>
           <details class="qa" data-reveal>
             <summary>궁금한 점은 어디로 문의하나요?</summary>
