@@ -1246,6 +1246,14 @@ svg {
   letter-spacing: -0.01em;
 }
 
+/* 장소처럼 긴 값은 두 줄로 작게 */
+.info-cell__value--place {
+  display: block;
+  font-size: clamp(38px, 3.6vw, 58px);
+  line-height: 0.92;
+  text-transform: uppercase;
+}
+
 .info-cell__value small {
   font-family: var(--font-mono);
   font-size: 15px;
@@ -1256,6 +1264,30 @@ svg {
 .info-cell__note {
   font-size: 15px;
   line-height: 1.5;
+}
+
+/* 장소 칸의 지도 바로가기 */
+.info-cell__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.info-cell__links a {
+  padding: 6px 12px;
+  border: var(--line);
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+
+.info-cell__links a:hover {
+  background: var(--ink);
+  color: var(--purple);
 }
 
 /* 신청 마감일 칸: 검은 배경으로 강조 */
@@ -1486,6 +1518,65 @@ svg {
   opacity: 0.72;
 }
 
+/* 11.14 당일 타임테이블: 위 일정과 같은 2열 구성 */
+.day {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.9fr) minmax(0, 2fr);
+  gap: 24px;
+  margin-top: clamp(48px, 6vw, 88px);
+  padding: 0 clamp(16px, 2vw, 28px);
+}
+
+.day__label {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+}
+
+.day__title {
+  margin-top: 8px;
+  font-size: clamp(22px, 2.2vw, 32px);
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.035em;
+}
+
+.day__list {
+  border-top: var(--line);
+}
+
+.day__row {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 16px;
+  align-items: baseline;
+  padding: 14px 0;
+  border-bottom: 1px solid rgb(11 11 12 / 0.28);
+}
+
+.day__time {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.day__what {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.day__row--key .day__what {
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.day__note {
+  grid-column: 2;
+  font-size: 14px;
+  opacity: 0.72;
+}
+
 .timeline__row--main {
   margin-top: 16px;
   background: var(--ink);
@@ -1518,6 +1609,25 @@ svg {
 
   .timeline__body {
     padding-right: 72px;
+  }
+
+  .day {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .day__note {
+    grid-column: 1;
+  }
+
+  .day__row {
+    grid-template-columns: 118px minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .day__time {
+    font-size: 13px;
+    letter-spacing: 0;
   }
 }
 
@@ -1799,9 +1909,10 @@ svg {
   color: var(--purple);
 }
 
+/* 주최 3곳 + 후원 1곳이 같은 폭의 카드가 되도록 3:1 */
 .partners__grid {
   display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);
   gap: 16px;
 }
 
@@ -1860,6 +1971,11 @@ svg {
 
 .partner__logo--aws {
   width: clamp(120px, 10vw, 156px);
+  height: auto;
+}
+
+.partner__logo--awskrug {
+  width: clamp(160px, 12vw, 200px);
   height: auto;
 }
 
