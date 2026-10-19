@@ -1246,6 +1246,28 @@ svg {
   letter-spacing: -0.01em;
 }
 
+/* 참가 대상처럼 문장으로 보여 주는 값 */
+.info-cell__value--text {
+  display: block;
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-stretch: normal;
+  font-size: clamp(24px, 2.2vw, 32px);
+  line-height: 1.35;
+  letter-spacing: -0.045em;
+}
+
+/* 핵심 단어는 '2026' 태그처럼 검은 알약으로 */
+.info-cell__value--text em {
+  display: inline-block;
+  padding: 0.02em 0.32em 0.06em;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--purple);
+  font-style: normal;
+  transform: rotate(-3deg);
+}
+
 /* 장소처럼 긴 값은 두 줄로 작게 */
 .info-cell__value--place {
   display: block;
