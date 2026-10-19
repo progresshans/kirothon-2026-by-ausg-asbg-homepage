@@ -1543,7 +1543,7 @@ svg {
   font-size: 16px;
 }
 
-/* 필수가 아닌 일정 표시 */
+/* 필수가 아닌 일정 표시: 제목 옆 작은 라벨 */
 .timeline__tag {
   display: inline-block;
   margin-left: 8px;
@@ -1554,6 +1554,11 @@ svg {
   font-weight: 700;
   letter-spacing: 0;
   vertical-align: middle;
+}
+
+/* 줄이 넘칠 때 태그만 혼자 떨어지지 않도록 마지막 단어와 묶음 */
+.timeline__keep {
+  white-space: nowrap;
 }
 
 .timeline__link {
@@ -1651,7 +1656,8 @@ svg {
     gap: 10px;
   }
 
-  .timeline__body {
+  /* 고스트가 있는 당일 카드만 오른쪽 여백 */
+  .timeline__row--main .timeline__body {
     padding-right: 72px;
   }
 
