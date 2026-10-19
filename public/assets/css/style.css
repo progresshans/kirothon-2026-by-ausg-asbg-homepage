@@ -506,6 +506,10 @@ svg {
   width: 100%;
   height: 50vw;
   overflow: visible;
+  /* SVG 글자는 선택 색(::selection)의 글자색이 적용되지 않아 드래그하면 통째로 까맣게 보임.
+     장식용 타이틀이라 선택되지 않게 함 (화면 낭독기는 h1 안의 숨김 텍스트를 읽음) */
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .title-svg__text {
