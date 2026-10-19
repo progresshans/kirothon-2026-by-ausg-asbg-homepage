@@ -79,11 +79,11 @@ npx wrangler pages deploy
 
 저장소를 Import하면 `vercel.json` 설정(`outputDirectory: public`)대로 그대로 배포됩니다. Framework Preset은 `Other`로 두면 됩니다.
 
-### 배포 후 할 일
+### 도메인 연결 (kirothon.ausg.me)
 
-카카오톡·슬랙 등에서 링크 미리보기가 잘 나오도록, 도메인이 정해지면 `index.html`의 `og:image`를 절대 주소로 바꾸고 `og:url`을 추가해 주세요.
+`index.html`의 대표 주소(`canonical`, `og:url`)와 링크 미리보기 이미지(`og:image`)는 `https://kirothon.ausg.me` 기준으로 적혀 있습니다. 도메인을 바꾸면 이 세 곳도 함께 고쳐 주세요.
 
-```html
-<meta property="og:url" content="https://kirothon.example.com/" />
-<meta property="og:image" content="https://kirothon.example.com/assets/img/og.jpg" />
-```
+- **Cloudflare Pages:** 프로젝트 → Custom domains → `kirothon.ausg.me` 추가. `ausg.me`의 DNS가 Cloudflare에 있으면 레코드가 자동으로 만들어지고, 아니면 DNS에 `kirothon` CNAME → `<프로젝트이름>.pages.dev`를 추가합니다.
+- **Vercel:** 프로젝트 → Settings → Domains → `kirothon.ausg.me` 추가 후, 안내되는 CNAME 레코드(`kirothon` → `cname.vercel-dns.com`)를 DNS에 추가합니다.
+
+배포 후에는 [카카오 공유 디버거](https://developers.kakao.com/tool/debugger/sharing)에서 주소를 넣어 미리보기가 잘 나오는지 확인하고, 이미지를 바꾼 뒤에는 같은 곳에서 캐시를 초기화해 주세요.

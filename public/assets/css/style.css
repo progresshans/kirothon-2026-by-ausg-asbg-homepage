@@ -483,6 +483,25 @@ svg {
   margin: clamp(10px, 1.6vw, 24px) calc(var(--gutter) * -0.35) 0;
 }
 
+/* 연도 태그: 푸터 로고처럼 이름 오른쪽 위에 붙임 */
+.hero__year {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  right: 1.5%;
+  padding: 0.12em 0.42em 0.06em;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--purple);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 70%;
+  font-size: clamp(22px, 3vw, 48px);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  transform: translateY(-55%) rotate(-6deg);
+}
+
 .title-svg {
   width: 100%;
   height: 50vw;
@@ -1461,6 +1480,12 @@ svg {
   font-size: 16px;
 }
 
+.timeline__body .timeline__note {
+  margin-top: 4px;
+  font-size: 14px;
+  opacity: 0.72;
+}
+
 .timeline__row--main {
   margin-top: 16px;
   background: var(--ink);
@@ -1930,6 +1955,14 @@ svg {
 .footer__meta a {
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
+}
+
+/* 이메일은 대문자로 바꾸지 않고, 좁은 화면에서는 줄바꿈 허용 */
+.footer__mail {
+  color: var(--paper);
+  text-transform: none;
+  letter-spacing: 0.02em;
+  overflow-wrap: anywhere;
 }
 
 .footer__meta a:hover {
