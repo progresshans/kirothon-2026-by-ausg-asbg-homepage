@@ -93,7 +93,7 @@ svg {
 
 .flow :focus-visible,
 .footer :focus-visible,
-.info-cell--apply :focus-visible {
+.info-cell--deadline :focus-visible {
   outline-color: var(--purple);
 }
 
@@ -241,12 +241,22 @@ svg {
   transform: rotate(90deg) translateX(3px);
 }
 
-/* 신청 링크가 아직 없을 때 */
+/* 신청 링크가 아직 없거나(soon) 마감됐을 때(closed) */
 .btn[aria-disabled="true"] .btn__icon {
   display: none;
 }
 
-.btn[aria-disabled="true"]::after {
+.btn[data-apply-state="closed"] {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.btn[data-apply-state="closed"]:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.btn[data-apply-state="soon"]::after {
   content: "SOON";
   padding: 4px 7px 3px;
   border-radius: 999px;
@@ -256,12 +266,12 @@ svg {
   letter-spacing: 0.08em;
 }
 
-.btn--purple[aria-disabled="true"]::after {
+.btn--purple[data-apply-state="soon"]::after {
   background: var(--ink);
   color: var(--purple);
 }
 
-.btn--ink[aria-disabled="true"]:hover::after {
+.btn--ink[data-apply-state="soon"]:hover::after {
   background: var(--ink);
   color: var(--purple);
 }
@@ -437,7 +447,7 @@ svg {
 
   .nav__year,
   .nav .chip,
-  .nav .btn[aria-disabled="true"]::after {
+  .nav .btn[data-apply-state="soon"]::after {
     display: none;
   }
 }
@@ -488,15 +498,20 @@ svg {
   fill: var(--ink);
 }
 
-.scribble--next {
+/* 메인 표어: 날짜 오른쪽에 손글씨로 */
+.hero__slogan {
   position: absolute;
   z-index: 4;
-  left: 53%;
-  top: 100%;
+  left: calc(100% + clamp(20px, 2.4vw, 44px));
+  bottom: 18%;
   width: max-content;
-  font-size: clamp(22px, 2.6vw, 44px);
-  transform: rotate(-9deg) translateY(28%);
-  transform-origin: left top;
+  font-size: clamp(20px, 2vw, 34px);
+  transform: rotate(-9deg);
+  transform-origin: left bottom;
+}
+
+.hero__slogan span {
+  display: block;
 }
 
 .hero__body {
@@ -516,6 +531,7 @@ svg {
 }
 
 .hero__date-row {
+  position: relative;
   display: flex;
   align-items: flex-end;
   gap: 16px;
@@ -538,25 +554,38 @@ svg {
   padding-bottom: 0.4em;
 }
 
-.hero__flow {
-  margin-top: 22px;
-  font-size: clamp(11px, 1vw, 14px);
-  letter-spacing: 0.22em;
-  word-spacing: 0.3em;
-}
-
-.hero__lead {
-  margin-top: 14px;
-  font-size: clamp(15px, 1.25vw, 18px);
-  font-weight: 500;
-  line-height: 1.55;
-}
-
 .hero__cta {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
   margin-top: 26px;
+}
+
+/* 신청 마감일 안내 (hero, CTA 버튼 아래) */
+.apply-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.apply-note::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ink);
+  flex: none;
+}
+
+.hero .apply-note {
+  margin-top: 14px;
+}
+
+.cta .apply-note {
+  margin-top: -10px;
 }
 
 /* 고스트는 몸 전체(아래 물결 + 팔)가 보이도록 마퀴 띠 위에 올려 둔다 */
@@ -576,10 +605,6 @@ svg {
   right: 30vw;
   bottom: -12vw;
   transform: rotate(18deg);
-}
-
-.br-mobile {
-  display: none;
 }
 
 /* ghost */
@@ -730,10 +755,6 @@ svg {
     font-size: clamp(64px, 8.4vw, 132px);
   }
 
-  .hero__flow {
-    margin-top: 14px;
-  }
-
   .hero__cta {
     margin-top: 16px;
   }
@@ -744,10 +765,6 @@ svg {
   .hero {
     display: flex;
     flex-direction: column;
-  }
-
-  .scribble--next {
-    display: none;
   }
 
   .hero__body {
@@ -770,10 +787,6 @@ svg {
     top: 66%;
   }
 
-  .br-mobile {
-    display: inline;
-  }
-
   .star--hero-a {
     width: min(70vw, 520px);
     right: auto;
@@ -786,6 +799,29 @@ svg {
     width: min(58vw, 440px);
     right: -18vw;
     bottom: min(44vw, 320px);
+  }
+}
+
+/* 휴대폰: 날짜 옆 공간이 없으니 표어를 날짜 아래로.
+   왼쪽 정렬된 요소들 사이에서 메모처럼 보이도록 오른쪽으로 비켜 붙임 */
+@media (max-width: 560px) {
+  .hero__date-row {
+    flex-wrap: wrap;
+  }
+
+  .hero__slogan {
+    position: static;
+    flex-basis: 100%;
+    margin-top: 18px;
+    padding-right: 2vw;
+    font-size: clamp(24px, 6.4vw, 34px);
+    text-align: right;
+    transform: rotate(-5deg);
+    transform-origin: right bottom;
+  }
+
+  .hero__slogan .scribble__line {
+    margin-left: auto;
   }
 }
 
@@ -1152,7 +1188,7 @@ svg {
   border-bottom: 0;
 }
 
-.info-cell:not(.info-cell--apply):hover {
+.info-cell:not(.info-cell--deadline):hover {
   background: var(--purple-soft);
 }
 
@@ -1198,22 +1234,19 @@ svg {
   letter-spacing: 0.08em;
 }
 
-.info-cell__value--sm {
-  font-size: clamp(40px, 4vw, 64px);
-  text-transform: uppercase;
-}
-
 .info-cell__note {
   font-size: 15px;
   line-height: 1.5;
 }
 
-.info-cell--apply {
+/* 신청 마감일 칸: 검은 배경으로 강조 */
+.info-cell--deadline {
   background: var(--ink);
   color: var(--purple);
 }
 
-.info-cell--apply dt span {
+.info-cell--deadline dt span,
+.info-cell--deadline .info-cell__note {
   color: var(--paper);
 }
 

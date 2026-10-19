@@ -2,7 +2,10 @@
   "use strict";
 
   const EVENT_START = new Date("2026-11-14T00:00:00+09:00");
+  const APPLY_DEADLINE = new Date("2026-11-09T23:59:59+09:00"); // 11월 9일(월) 하루 끝까지 신청 가능
   const DAY = 86400000;
+  // KST 기준 날짜 번호 (D-day 계산용)
+  const kstDay = (d) => Math.floor((d.getTime() + 9 * 3600000) / DAY);
 
   const root = document.documentElement;
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -23,21 +26,32 @@
   }
 
   /* ---------- 신청 버튼 ---------- */
+  // soon: 링크 없음 / open: 신청 중 / closed: 마감
   const applyUrl = ($('meta[name="kirothon:apply-url"]')?.content || "").trim();
+  const applyState = !applyUrl ? "soon" : new Date() > APPLY_DEADLINE ? "closed" : "open";
   $$("[data-apply]").forEach((el) => {
     const label = $("[data-apply-label]", el);
-    if (applyUrl) {
+    el.dataset.applyState = applyState;
+    if (applyState === "open") {
       el.href = applyUrl;
       el.target = "_blank";
       el.rel = "noopener noreferrer";
       if (label) label.textContent = el.classList.contains("btn--sm") ? "참가 신청" : "참가 신청하기";
-    } else {
-      el.setAttribute("aria-disabled", "true");
-      el.addEventListener("click", (e) => {
-        e.preventDefault();
-        toast("참가 신청이 곧 열려요. 조금만 기다려 주세요! 👻");
-      });
+      return;
     }
+    el.setAttribute("aria-disabled", "true");
+    if (applyState === "closed" && label) label.textContent = "신청 마감";
+    el.addEventListener("click", (e) => {
+      e.preventDefault();
+      toast(applyState === "closed" ? "참가 신청이 마감되었어요. 다음에 또 만나요! 👻" : "참가 신청이 곧 열려요. 조금만 기다려 주세요! 👻");
+    });
+  });
+
+  // 마감일 안내: 신청 중이면 마감까지 남은 날짜를 함께 표시
+  const applyLeft = kstDay(APPLY_DEADLINE) - kstDay(new Date());
+  $$("[data-apply-note]").forEach((el) => {
+    if (applyState === "closed") el.textContent = "참가 신청이 마감되었어요";
+    else if (applyState === "open") el.textContent = applyLeft > 0 ? `신청 마감 · 11월 9일(월) · D-${applyLeft}` : "오늘 신청 마감!";
   });
 
   /* ---------- D-day & countdown ---------- */
@@ -48,8 +62,6 @@
 
   function tick() {
     const now = new Date();
-    // KST 기준 날짜 차이
-    const kstDay = (d) => Math.floor((d.getTime() + 9 * 3600000) / DAY);
     const days = kstDay(EVENT_START) - kstDay(now);
     const label = days > 0 ? `D-${days}` : days === 0 ? "D-DAY" : "THANK YOU";
     ddayEls.forEach((el) => (el.textContent = label));
