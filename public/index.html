@@ -4,20 +4,23 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>KIROTHON 2026 — Hackathon using Kiro</title>
-  <meta name="description" content="2026.11.14, Kiro와 함께 아이디어를 진짜로 만드는 해커톤. 1~4인 팀으로 참가하세요." />
+  <meta name="description" content="Turn your idea into reality. 2026.11.14, Kiro와 함께 아이디어를 진짜로 만드는 해커톤. 1~4인 팀으로 참가하세요." />
   <meta name="theme-color" content="#8A44FF" />
 
   <!--
-    참가 신청 구글폼 주소를 content에 넣으면 페이지의 모든 '참가 신청' 버튼이 활성화됩니다.
-    비워 두면 버튼이 '신청 오픈 예정' 상태로 표시됩니다.
+    참가 신청 구글폼 주소. 페이지의 모든 '참가 신청' 버튼이 이 주소로 연결됩니다.
+    비워 두면 버튼이 '신청 오픈 예정' 상태로, 마감일(main.js의 APPLY_DEADLINE)이 지나면 '신청 마감'으로 바뀝니다.
   -->
-  <meta name="kirothon:apply-url" content="" />
+  <meta name="kirothon:apply-url" content="https://forms.gle/RNb9ki21iVRuFQWD8" />
 
-  <!-- 배포 도메인이 정해지면 og:url / og:image를 절대 경로(https://...)로 바꿔 주세요. -->
+  <!-- 링크 미리보기(카카오톡·슬랙 등)는 전체 주소가 필요해서 도메인을 포함해 적어 둡니다. -->
+  <link rel="canonical" href="https://kirothon.ausg.me/" />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://kirothon.ausg.me/" />
+  <meta property="og:site_name" content="KIROTHON 2026" />
   <meta property="og:title" content="KIROTHON 2026 — Hackathon using Kiro" />
-  <meta property="og:description" content="2026.11.14, Kiro와 함께 아이디어를 진짜로 만드는 해커톤. 1~4인 팀으로 참가하세요." />
-  <meta property="og:image" content="/assets/img/og.jpg" />
+  <meta property="og:description" content="Turn your idea into reality. 2026.11.14, Kiro와 함께 아이디어를 진짜로 만드는 해커톤. 1~4인 팀으로 참가하세요." />
+  <meta property="og:image" content="https://kirothon.ausg.me/assets/img/og.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:locale" content="ko_KR" />
@@ -33,6 +36,53 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
   <link rel="stylesheet" href="/assets/css/style.css" />
   <script src="/assets/js/main.js" defer></script>
+
+  <!-- 구글 검색 결과에 행사 정보(날짜·장소·주최)를 보여 주기 위한 구조화 데이터 -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "KIROTHON 2026",
+      "description": "Turn your idea into reality. Kiro와 함께 아이디어를 진짜로 만드는 해커톤. 1~4인 팀으로 참가하세요.",
+      "startDate": "2026-11-14T10:00:00+09:00",
+      "endDate": "2026-11-14T20:50:00+09:00",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "location": {
+        "@type": "Place",
+        "name": "CENTERFIELD EAST 12F, AWS Korea",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "테헤란로 231 센터필드 EAST 12층",
+          "addressLocality": "강남구",
+          "addressRegion": "서울특별시",
+          "addressCountry": "KR"
+        }
+      },
+      "image": [
+        "https://kirothon.ausg.me/assets/img/og.jpg"
+      ],
+      "url": "https://kirothon.ausg.me/",
+      "organizer": [
+        {
+          "@type": "Organization",
+          "name": "AUSG"
+        },
+        {
+          "@type": "Organization",
+          "name": "AWS Student Builder Group"
+        },
+        {
+          "@type": "Organization",
+          "name": "AWSKRUG"
+        }
+      ],
+      "sponsor": {
+        "@type": "Organization",
+        "name": "Amazon Web Services"
+      }
+    }
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#about">본문으로 건너뛰기</a>
@@ -79,12 +129,6 @@
     <img class="star star--hero-a" src="/assets/img/star-a.svg" alt="" aria-hidden="true" />
     <img class="star star--hero-b" src="/assets/img/star-b.svg" alt="" aria-hidden="true" />
 
-    <div class="hero__top mono">
-      <p class="hero__stack">Ideas<br />People<br />Prompts<br />Real things</p>
-      <p class="hero__spaced">Build<br />with<br />Kiro</p>
-      <p class="hero__tagline"><span class="dash" aria-hidden="true"></span>A brighter idea tomorrow might start here.</p>
-    </div>
-
     <div class="hero__title-wrap">
       <h1 class="hero__title">
         <span class="sr-only">KIROTHON 2026</span>
@@ -102,10 +146,8 @@
           <text class="title-svg__text" x="2006" y="1286" textLength="988" lengthAdjust="spacingAndGlyphs" filter="url(#wave)">KIROTHON</text>
         </svg>
       </h1>
-      <p class="scribble scribble--next" aria-hidden="true">
-        Build<br />what's<br />next
-        <svg viewBox="0 0 200 24" class="scribble__line"><path d="M4 18C58 8 128 4 196 9" /></svg>
-      </p>
+      <!-- 행사 명칭 "KIROTHON 2026"의 연도: 타이틀 오른쪽 위에 태그로 -->
+      <span class="hero__year" aria-hidden="true">2026</span>
     </div>
 
     <div class="hero__body">
@@ -116,11 +158,13 @@
           <span class="chip">SAT</span>
           <span class="chip chip--ink" data-dday>D-32</span>
         </p>
+        <!-- 메인 표어: 날짜 옆 손글씨 (모바일에서는 날짜 아래) -->
+        <p class="scribble hero__slogan">
+          <span>Turn your idea</span>
+          <span>into reality</span>
+          <svg viewBox="0 0 200 24" class="scribble__line" aria-hidden="true"><path d="M4 18C58 8 128 4 196 9" /></svg>
+        </p>
       </div>
-      <p class="hero__flow mono" aria-label="Ideas, Build, Share, Together">
-        Ideas <span aria-hidden="true">→</span> Build <span aria-hidden="true">→</span> Share <span aria-hidden="true">→</span> Together
-      </p>
-      <p class="hero__lead">Kiro와 함께 아이디어를 진짜로 만드는 해커톤. <br class="br-mobile" />1~4인 팀으로 참가하세요.</p>
       <div class="hero__cta">
         <a class="btn btn--ink" href="#apply" data-apply>
           <span data-apply-label>신청 오픈 예정</span>
@@ -131,6 +175,7 @@
           <svg class="btn__icon btn__icon--down" aria-hidden="true"><use href="#i-arrow" /></svg>
         </a>
       </div>
+      <p class="apply-note" data-apply-note>신청 마감 · 11월 9일(월)</p>
     </div>
 
     <div class="hero__ghost" aria-hidden="true">
@@ -153,12 +198,14 @@
   <div class="marquee" aria-hidden="true">
     <div class="marquee__track">
       <div class="marquee__group">
+        <span>Turn your idea into reality</span><i>✱</i>
         <span>Ideas don't sleep</span><i>✱</i>
         <span>Build what's next</span><i>✱</i>
         <span>Good ideas haunt the future</span><i>✱</i>
         <span>Same tools, different possibilities</span><i>✱</i>
       </div>
       <div class="marquee__group">
+        <span>Turn your idea into reality</span><i>✱</i>
         <span>Ideas don't sleep</span><i>✱</i>
         <span>Build what's next</span><i>✱</i>
         <span>Good ideas haunt the future</span><i>✱</i>
@@ -230,12 +277,11 @@
         <div class="builders__text" data-reveal>
           <p class="mono eyebrow">For curious builders everywhere</p>
           <h2 class="builders__title" id="builders-title">같은 도구,<br />다른 가능성.</h2>
-          <p>코드를 쓰는 사람도, 화면을 그리는 사람도, 지루한 일을 자동화하고 싶은 사람도. Kiro라는 같은 도구로 각자의 방식대로 만들어 보세요.</p>
-          <p class="note">※ 정확한 참가 대상은 추후 공지됩니다.</p>
+          <p>코드를 쓰는 사람도, 지루한 일을 자동화하고 싶은 사람도. Kiro라는 같은 도구로 각자의 방식대로 만들어 보세요.</p>
+          <p class="note">참가 대상 · Kiro와 함께 뭔가 만들어 보는 하루가 궁금한 분</p>
         </div>
-        <ul class="words" aria-label="Code, Design, Automate, Collaborate, Repeat">
+        <ul class="words" aria-label="Code, Automate, Collaborate, Repeat">
           <li data-reveal><span class="words__en">Code</span><span class="words__ko mono">코드</span></li>
-          <li data-reveal><span class="words__en">Design</span><span class="words__ko mono">디자인</span></li>
           <li data-reveal><span class="words__en">Automate</span><span class="words__ko mono">자동화</span></li>
           <li data-reveal><span class="words__en">Collaborate</span><span class="words__ko mono">협업</span></li>
           <li data-reveal><span class="words__en">Repeat</span><span class="words__ko mono">반복</span></li>
@@ -244,7 +290,6 @@
     </section>
 
     <!-- ───────── 02 INFO ───────── -->
-    <!-- 확정되면 class="tba" 부분을 실제 값으로 바꿔 주세요. -->
     <section class="section info" id="info" aria-labelledby="info-title">
       <div class="wrap">
         <div class="sec-head" data-reveal>
@@ -257,14 +302,18 @@
             <dt class="mono">Date <span>일시</span></dt>
             <dd>
               <p class="info-cell__value">11.14<small>SAT</small></p>
-              <p class="info-cell__note">2026년 11월 14일 토요일<br />세부 시간은 추후 공개</p>
+              <p class="info-cell__note">2026년 11월 14일 토요일<br />10:00 – 20:50</p>
             </dd>
           </div>
           <div class="info-cell" data-reveal>
             <dt class="mono">Place <span>장소</span></dt>
             <dd>
-              <p class="info-cell__value tba">TBA</p>
-              <p class="info-cell__note">장소는 추후 공개됩니다</p>
+              <p class="info-cell__value info-cell__value--place">Centerfield<br />East 12F</p>
+              <p class="info-cell__note">CENTERFIELD EAST 12층 · AWS Korea<br />서울 강남구 테헤란로 231</p>
+              <p class="info-cell__links">
+                <a href="https://naver.me/FRoHD3ic" target="_blank" rel="noopener noreferrer">네이버 지도 ↗</a>
+                <a href="https://kko.to/yGMwuXUCyW" target="_blank" rel="noopener noreferrer">카카오맵 ↗</a>
+              </p>
             </dd>
           </div>
           <div class="info-cell" data-reveal>
@@ -277,25 +326,21 @@
           <div class="info-cell" data-reveal>
             <dt class="mono">For <span>참가 대상</span></dt>
             <dd>
-              <p class="info-cell__value tba">TBA</p>
-              <p class="info-cell__note">참가 대상은 추후 공개됩니다</p>
+              <p class="info-cell__value info-cell__value--text">Kiro와 함께<br />뭔가 만들어 보는<br />하루가 <em>궁금한 분</em></p>
             </dd>
           </div>
           <div class="info-cell" data-reveal>
             <dt class="mono">Theme <span>주제</span></dt>
             <dd>
-              <p class="info-cell__value tba">TBA</p>
-              <p class="info-cell__note">해커톤 주제는 추후 공개됩니다</p>
+              <p class="info-cell__value">???</p>
+              <p class="info-cell__note">주제는 해커톤 당일 오프닝에서 공개됩니다</p>
             </dd>
           </div>
-          <div class="info-cell info-cell--apply" data-reveal>
-            <dt class="mono">Apply <span>참가 신청</span></dt>
+          <div class="info-cell info-cell--deadline" data-reveal>
+            <dt class="mono">Deadline <span>신청 마감</span></dt>
             <dd>
-              <p class="info-cell__value info-cell__value--sm">Google Form</p>
-              <a class="btn btn--purple btn--sm" href="#apply" data-apply>
-                <span data-apply-label>신청 오픈 예정</span>
-                <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow-ne" /></svg>
-              </a>
+              <p class="info-cell__value">11.09<small>MON</small></p>
+              <p class="info-cell__note">2026년 11월 9일 월요일까지<br />구글 폼으로 신청</p>
             </dd>
           </div>
         </dl>
@@ -349,28 +394,78 @@
 
         <ol class="timeline">
           <li class="timeline__row" data-reveal>
-            <p class="timeline__date tba">TBA</p>
+            <p class="timeline__date">10.20 <small>TUE</small></p>
             <div class="timeline__body">
-              <h3>참가 신청 접수</h3>
-              <p>구글 폼으로 신청을 받아요. 모집 기간은 추후 공개됩니다.</p>
+              <h3>참가 신청 접수 시작</h3>
+              <p>구글 폼으로 참가 신청을 받아요.</p>
             </div>
           </li>
           <li class="timeline__row" data-reveal>
-            <p class="timeline__date tba">TBA</p>
+            <p class="timeline__date">11.09 <small>MON</small></p>
             <div class="timeline__body">
-              <h3>주제 · 참가 대상 공개</h3>
-              <p>확정되는 대로 이 페이지를 통해 공지됩니다.</p>
+              <h3>신청 마감 · 참가 확정</h3>
+              <p>참가 확정 메일은 신청 기간 동안 순차적으로 보내드릴 예정이에요.</p>
             </div>
           </li>
           <li class="timeline__row timeline__row--main" data-reveal>
             <p class="timeline__date">11.14 <small>SAT</small></p>
             <div class="timeline__body">
               <h3>KIROTHON 2026</h3>
-              <p>해커톤 당일! 세부 타임테이블은 추후 공개됩니다.</p>
+              <p>해커톤 당일! 주제는 오프닝에서 공개돼요.</p>
             </div>
             <svg class="timeline__ghost" aria-hidden="true"><use href="#i-ghost" /></svg>
           </li>
         </ol>
+        <!-- 11.14 당일 타임테이블 (참가자용 요약) -->
+        <div class="day" data-reveal>
+          <div class="day__head">
+            <p class="day__label mono">11.14 SAT · Timetable</p>
+            <h3 class="day__title">당일 타임테이블</h3>
+          </div>
+          <ol class="day__list">
+            <li class="day__row">
+              <p class="day__time mono"><time datetime="10:00">10:00</time> – <time datetime="10:40">10:40</time></p>
+              <p class="day__what">입장 · 등록</p>
+            </li>
+            <li class="day__row">
+              <p class="day__time mono"><time datetime="10:40">10:40</time> – <time datetime="11:00">11:00</time></p>
+              <p class="day__what">오프닝 · 주제 발표</p>
+            </li>
+            <li class="day__row day__row--key">
+              <p class="day__time mono"><time datetime="11:00">11:00</time> – <time datetime="13:00">13:00</time></p>
+              <p class="day__what">개발 1부</p>
+            </li>
+            <li class="day__row">
+              <p class="day__time mono"><time datetime="13:00">13:00</time> – <time datetime="14:00">14:00</time></p>
+              <p class="day__what">점심 · 이벤트 부스</p>
+            </li>
+            <li class="day__row day__row--key">
+              <p class="day__time mono"><time datetime="14:00">14:00</time> – <time datetime="18:00">18:00</time></p>
+              <p class="day__what">개발 2부</p>
+            </li>
+            <li class="day__row day__row--key">
+              <p class="day__time mono"><time datetime="18:00">18:00</time></p>
+              <p class="day__what">결과물 제출 마감</p>
+            </li>
+            <li class="day__row">
+              <p class="day__time mono"><time datetime="18:00">18:00</time> – <time datetime="19:00">19:00</time></p>
+              <p class="day__what">저녁 · 커뮤니티 세션</p>
+            </li>
+            <li class="day__row day__row--key">
+              <p class="day__time mono"><time datetime="19:00">19:00</time> – <time datetime="19:25">19:25</time></p>
+              <p class="day__what">결승 피칭</p>
+            </li>
+            <li class="day__row">
+              <p class="day__time mono"><time datetime="19:25">19:25</time> – <time datetime="20:25">20:25</time></p>
+              <p class="day__what">네트워킹 · DJ 공연</p>
+            </li>
+            <li class="day__row">
+              <p class="day__time mono"><time datetime="20:25">20:25</time> – <time datetime="20:50">20:50</time></p>
+              <p class="day__what">시상 · 클로징</p>
+            </li>
+          </ol>
+          <p class="day__note">자세한 진행 내용은 당일 현장에서 안내해 드려요. 시간은 현장 상황에 따라 조금 달라질 수 있어요.</p>
+        </div>
       </div>
     </section>
 
@@ -440,28 +535,28 @@
 
         <div class="faq__list">
           <details class="qa" data-reveal>
-            <summary>팀은 어떻게 구성하나요?</summary>
-            <div class="qa__a"><p>1인부터 최대 4인까지 팀으로 참가할 수 있어요. 혼자 참가하는 것도 가능해요.</p></div>
+            <summary>혼자서도 참가할 수 있나요?</summary>
+            <div class="qa__a"><p>네, 혼자 참가할 수 있어요. 팀으로 참가한다면 최대 4명까지 함께할 수 있어요.</p></div>
           </details>
           <details class="qa" data-reveal>
-            <summary>신청은 어떻게 하나요?</summary>
-            <div class="qa__a"><p>이 페이지의 ‘참가 신청’ 버튼을 눌러 구글 폼으로 신청해 주세요. 모집 기간은 추후 공지됩니다.</p></div>
-          </details>
-          <details class="qa" data-reveal>
-            <summary>해커톤 주제와 참가 대상은 무엇인가요?</summary>
-            <div class="qa__a"><p>현재 확정 중이에요. 정해지는 대로 이 페이지를 통해 공개할게요.</p></div>
+            <summary>참가 확정은 어떻게 알 수 있나요?</summary>
+            <div class="qa__a"><p>신청 기간 동안 참가 확정 메일을 순차적으로 보내드리고, 11월 9일(월)까지 모두 확정돼요. 메일을 받지 못하셨다면 문의 메일로 알려 주세요.</p></div>
           </details>
           <details class="qa" data-reveal>
             <summary>Kiro를 처음 써 봐도 괜찮을까요?</summary>
-            <div class="qa__a"><p>행사 전에 <a href="https://kiro.dev" target="_blank" rel="noopener noreferrer">kiro.dev</a>에서 Kiro를 미리 설치하고 사용해 보시는 걸 추천해요. 11.04에 열리는 <a href="#sessions">Kiro Basic 세션</a>에 참여하면 입문자도 당일 훨씬 빠르게 시작할 수 있어요.</p></div>
+            <div class="qa__a"><p>행사 전에 <a href="https://kiro.dev" target="_blank" rel="noopener noreferrer">kiro.dev</a>에서 Kiro를 미리 설치하고 로그인까지 해 두시는 걸 추천해요. 11.04에 열리는 <a href="#sessions">Kiro Basic 세션</a>에 참여하면 입문자도 당일 훨씬 빠르게 시작할 수 있어요.</p></div>
           </details>
           <details class="qa" data-reveal>
             <summary>무엇을 준비해야 하나요?</summary>
-            <div class="qa__a"><p>노트북과 만들고 싶은 아이디어면 충분해요. 자세한 준비 사항은 추후 안내드릴게요.</p></div>
+            <div class="qa__a"><p>노트북과 만들고 싶은 아이디어면 충분해요. 자세한 준비 사항은 참가 확정 메일로 안내드릴게요.</p></div>
+          </details>
+          <details class="qa" data-reveal>
+            <summary>식사는 제공되나요?</summary>
+            <div class="qa__a"><p>네, 당일 점심과 저녁을 제공해 드려요.</p></div>
           </details>
           <details class="qa" data-reveal>
             <summary>궁금한 점은 어디로 문의하나요?</summary>
-            <div class="qa__a"><p>문의 채널은 추후 공개됩니다.</p></div>
+            <div class="qa__a"><p><a href="mailto:awsstudentbuildergroup@gmail.com">awsstudentbuildergroup@gmail.com</a>으로 메일 보내 주세요.</p></div>
           </details>
         </div>
       </div>
@@ -489,6 +584,9 @@
                   </svg>
                   <span aria-hidden="true">AWS Student<br />Builder Group</span>
                 </div>
+              </li>
+              <li class="partner">
+                <img class="partner__logo--awskrug" src="/assets/img/partners/awskrug.png" width="248" height="37" alt="AWSKRUG" />
               </li>
             </ul>
           </div>
@@ -522,6 +620,7 @@
             <span data-apply-label>신청 오픈 예정</span>
             <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow-ne" /></svg>
           </a>
+          <p class="apply-note" data-apply-note>신청 마감 · 11월 9일(월)</p>
         </div>
       </div>
       <span class="cta__sentinel" aria-hidden="true"></span>
@@ -547,17 +646,17 @@
       <div class="footer__brand">
         <svg class="footer__ghost" aria-hidden="true"><use href="#i-ghost" /></svg>
         <p class="footer__name">KIROTHON<span>2026</span></p>
-        <p class="mono">Kiro community hackathon 2026</p>
       </div>
       <div class="footer__meta mono">
-        <p>Organized by<br /><strong>AUSG × ASBG</strong></p>
+        <p>Organized by<br /><strong>AUSG × ASBG × AWSKRUG</strong></p>
         <p>Sponsored by<br /><strong>AWS</strong></p>
+        <p>Contact<br /><a class="footer__mail" href="mailto:awsstudentbuildergroup@gmail.com">awsstudentbuildergroup@gmail.com</a></p>
         <p><a href="https://kiro.dev" target="_blank" rel="noopener noreferrer">kiro.dev ↗</a></p>
       </div>
       <div class="footer__end mono">
         <p>A more open<br />tomorrow</p>
         <span class="barcode" aria-hidden="true"></span>
-        <p class="footer__copy">© 2026 KIROTHON</p>
+        <p class="footer__copy">© KIROTHON 2026</p>
       </div>
     </div>
   </footer>
