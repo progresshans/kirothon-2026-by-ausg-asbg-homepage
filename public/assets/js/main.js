@@ -249,6 +249,35 @@
     if (e.animationName === "boo") heroGhost.classList.remove("is-boo");
   });
 
+  /* ---------- 종이 카드: 마우스 위치 쪽으로 입체적으로 기울기 ---------- */
+  if (!reduceMotion && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    const MAX_TILT = 6; // deg
+    $$("[data-tilt]").forEach((card) => {
+      let point = null;
+      let frame = 0;
+      const apply = () => {
+        frame = 0;
+        if (!point) return;
+        const r = card.getBoundingClientRect();
+        const x = Math.min(Math.max((point.x - r.left) / r.width, 0), 1) - 0.5;
+        const y = Math.min(Math.max((point.y - r.top) / r.height, 0), 1) - 0.5;
+        card.style.setProperty("--ry", `${(x * MAX_TILT * 2).toFixed(2)}deg`);
+        card.style.setProperty("--rx", `${(-y * MAX_TILT * 2).toFixed(2)}deg`);
+      };
+      card.addEventListener("pointerenter", () => card.classList.add("is-tilting"));
+      card.addEventListener("pointermove", (e) => {
+        point = { x: e.clientX, y: e.clientY };
+        frame ||= requestAnimationFrame(apply);
+      });
+      card.addEventListener("pointerleave", () => {
+        point = null;
+        card.classList.remove("is-tilting");
+        card.style.removeProperty("--rx");
+        card.style.removeProperty("--ry");
+      });
+    });
+  }
+
   /* ---------- CTA 고스트: 페이지 끝에 닿으면 오른쪽 아래에서 빼꼼 ---------- */
   const ctaGhost = $(".cta__ghost");
   const sentinel = $(".cta__sentinel");

@@ -986,16 +986,44 @@ svg {
   font-size: clamp(16px, 1.25vw, 18px);
 }
 
-.kiro-card {
-  display: grid;
-  gap: 18px;
-  padding: clamp(24px, 2.6vw, 36px);
+/* 종이 카드: WHAT IS KIRO? · 세션 카드 공통
+   마우스를 올리면 떠오르며 마우스 위치 쪽으로 입체적으로 기울어짐 (main.js) */
+.paper-card {
+  --rest: 0deg;
+  --rx: 0deg;
+  --ry: 0deg;
+  --lift-x: 0px;
+  --lift: 0px;
   border: var(--line);
   border-radius: 28px;
   background: var(--paper);
   box-shadow: 8px 8px 0 var(--ink);
+  transform: perspective(1000px) translate(var(--lift-x), var(--lift)) rotate(var(--rest)) rotateX(var(--rx)) rotateY(var(--ry));
+  transition:
+    transform 0.5s var(--ease-out),
+    box-shadow 0.3s var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .paper-card:hover {
+    --lift: -6px;
+    box-shadow: 12px 12px 0 var(--ink);
+  }
+}
+
+/* 마우스를 따라 움직이는 동안에는 빠르게 반응 */
+.paper-card.is-tilting {
+  transition:
+    transform 0.12s linear,
+    box-shadow 0.3s var(--ease-out);
+}
+
+.kiro-card {
+  --rest: 1.2deg;
+  display: grid;
+  gap: 18px;
+  padding: clamp(24px, 2.6vw, 36px);
   font-size: 16px;
-  transform: rotate(1.2deg);
 }
 
 .kiro-card__head {
@@ -1069,7 +1097,7 @@ svg {
   }
 
   .kiro-card {
-    transform: none;
+    --rest: 0deg;
     max-width: 560px;
   }
 
@@ -1692,10 +1720,6 @@ svg {
   border-top: var(--line);
 }
 
-.sessions .sec-head {
-  margin-bottom: clamp(32px, 4vw, 56px);
-}
-
 .sessions__intro {
   display: grid;
   gap: 20px;
@@ -1746,7 +1770,6 @@ svg {
 .sessions__meta dt {
   font-size: 12px;
   letter-spacing: 0.14em;
-  opacity: 0.65;
 }
 
 .sessions__meta dd {
@@ -1769,7 +1792,6 @@ svg {
   font-size: 13px;
   font-weight: 500;
   letter-spacing: 0.08em;
-  opacity: 0.75;
 }
 
 .session-cards {
@@ -1781,45 +1803,22 @@ svg {
   list-style: none;
 }
 
+/* 세션 카드는 평소엔 납작하게, 마우스를 올리면 종이에서 떠오르며 그림자가 생김 */
 .session-card {
   position: relative;
   display: grid;
   align-content: start;
   gap: 10px;
   padding: clamp(26px, 2.6vw, 36px);
-  border: var(--line);
-  border-radius: 24px;
-  background: var(--paper);
-  transition:
-    background-color 0.3s,
-    transform 0.4s var(--ease-out),
-    box-shadow 0.3s;
+  box-shadow: 0 0 0 var(--ink);
 }
 
-.session-card::before {
-  content: "✱";
-  position: absolute;
-  top: 18px;
-  right: 22px;
-  font-family: var(--font-mono);
-  font-size: 18px;
-  color: var(--purple);
-  opacity: 0.5;
-  transition: transform 0.6s var(--ease-out);
-}
-
-.session-card:hover {
-  background: var(--paper);
-  transform: translateY(-6px) rotate(-0.6deg);
-  box-shadow: 8px 8px 0 var(--ink);
-}
-
-.session-card:nth-child(2):hover {
-  transform: translateY(-6px) rotate(0.6deg);
-}
-
-.session-card:hover::before {
-  transform: rotate(90deg);
+@media (hover: hover) and (pointer: fine) {
+  .session-card:hover {
+    --lift-x: -4px;
+    --lift: -4px;
+    box-shadow: 8px 8px 0 var(--ink);
+  }
 }
 
 .session-card__no {
@@ -1853,7 +1852,7 @@ svg {
   margin: 10px 0 0;
   padding: 0;
   list-style: none;
-  font-size: 14.5px;
+  font-size: 15px;
   line-height: 1.6;
 }
 
@@ -1867,17 +1866,12 @@ svg {
   position: absolute;
   left: 0;
   top: 0;
-  color: var(--purple-deep);
+  color: currentColor;
   font-weight: 700;
 }
 
 .session-card__desc li b {
-  padding: 1px 6px;
-  margin: 0 1px;
-  border-radius: 6px;
-  background: var(--purple);
-  color: var(--ink);
-  font-weight: 700;
+  font-weight: 800;
 }
 
 
