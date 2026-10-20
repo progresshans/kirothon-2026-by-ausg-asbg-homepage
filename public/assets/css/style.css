@@ -1309,7 +1309,16 @@ svg {
   transform: rotate(-3deg);
 }
 
-/* 장소처럼 긴 값은 두 줄로 작게 */
+/* 주제: 한 줄로 크게 */
+.info-cell__value--theme {
+  font-weight: 900;
+  font-size: clamp(36px, 4.4vw, 60px);
+  line-height: 1.1;
+  letter-spacing: -0.06em;
+  white-space: nowrap;
+}
+
+/* 장소처럼 긴 값은 여러 줄로 작게 */
 .info-cell__value--place {
   display: block;
   font-size: clamp(38px, 3.6vw, 58px);
