@@ -2368,23 +2368,13 @@ svg {
   text-align: right;
 }
 
+/* 실제 Code 128 바코드 (막대 1칸 = 1px)
+   어두운 바탕에 밝은 막대라 반전 인식을 지원하는 스캐너에서만 읽힘 */
 .barcode {
-  display: block;
-  width: 128px;
+  width: 123px;
   height: 30px;
-  background: repeating-linear-gradient(
-    90deg,
-    currentColor 0 2px,
-    transparent 2px 4px,
-    currentColor 4px 5px,
-    transparent 5px 8px,
-    currentColor 8px 11px,
-    transparent 11px 12px,
-    currentColor 12px 13px,
-    transparent 13px 16px,
-    currentColor 16px 17px,
-    transparent 17px 19px
-  );
+  fill: currentColor;
+  shape-rendering: crispEdges;
 }
 
 .footer__copy {
