@@ -619,6 +619,59 @@ svg {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* 이스터에그: 고스트를 연달아 10번 누르면 화면을 계속 떠다니는 Kiro Crew (main.js) */
+.crew {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.crew__ghost {
+  --crew-body: var(--paper);
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: none;
+  overflow: visible;
+  will-change: transform;
+}
+
+/* 움직임 줄이기: 제자리에서 나타나기만 */
+.crew--still .crew__ghost {
+  transition: opacity 0.6s;
+}
+
+.crew__ghost path {
+  fill: var(--crew-body);
+  transition: fill 0.7s;
+}
+
+.crew__ghost ellipse {
+  fill: var(--ink);
+}
+
+.crew__blink {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.08s;
+}
+
+.crew__ghost.is-blink .crew__blink {
+  transform: scaleY(0.1);
+}
+
+/* 대시할 때는 앞으로 길게 늘어난 모양으로 */
+.crew__dash,
+.crew__ghost.is-dashing .crew__idle {
+  display: none;
+}
+
+.crew__ghost.is-dashing .crew__dash {
+  display: inline;
+}
+
 /* 고스트는 몸 전체(아래 물결 + 팔)가 보이도록 마퀴 띠 위에 올려 둔다 */
 .hero__ghost {
   position: relative;
