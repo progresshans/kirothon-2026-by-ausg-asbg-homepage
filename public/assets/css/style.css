@@ -611,6 +611,14 @@ svg {
   margin-top: -10px;
 }
 
+/* 고스트를 여러 번 눌러도 말풍선·스티커 글씨가 드래그(선택)되지 않게 */
+.hero__ghost,
+.cta__ghost {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* 고스트는 몸 전체(아래 물결 + 팔)가 보이도록 마퀴 띠 위에 올려 둔다 */
 .hero__ghost {
   position: relative;

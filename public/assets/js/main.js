@@ -245,6 +245,10 @@
       bubbleTimer = setTimeout(() => bubble.classList.remove("is-on"), 1600);
     }
   });
+  // 연속 클릭(더블·트리플 클릭)이 주변 글씨까지 선택하지 않도록
+  heroGhost?.addEventListener("mousedown", (e) => {
+    if (e.detail > 1) e.preventDefault();
+  });
   heroGhost?.addEventListener("animationend", (e) => {
     if (e.animationName === "boo") heroGhost.classList.remove("is-boo");
   });
