@@ -288,7 +288,7 @@
     `<g class="crew__eyes"><g class="crew__blink"><ellipse cx="${a}" cy="${cy}" rx="13" ry="21" /><ellipse cx="${b}" cy="${cy}" rx="13" ry="21" /></g></g>`;
   const CREW_MARKUP = `<g class="crew__idle"><path d="${GHOST_D}" />${eyes(214, 260, 161)}</g><g class="crew__dash"><path d="${DASH_D}" />${eyes(268, 306, 176)}</g>`;
   const STAGGER = 0.22; // s, 한 마리씩 등장하는 간격
-  const crewSizes = () => (window.innerWidth < 600 ? [20, 64] : [24, 96]); // 고스트 몸통 너비 범위(px), 변신해도 이 안에서만
+  const crewSizes = () => (window.innerWidth < 600 ? [24, 72] : [32, 104]); // 고스트 몸통 너비 범위(px), 변신해도 이 안에서만
   const CREW_COLORS = ["#ffffff", "#ffffff", "#ece2ff", "#dccbff", "#c7a6ff"];
 
   const rand = (min, max) => min + Math.random() * (max - min);
@@ -314,7 +314,13 @@
 
     const small = window.innerWidth < 600;
     const count = small ? 8 : 12;
-    for (let i = 0; i < count; i++) crew.push(spawnGhost(layer, i, small));
+    // 크기 구간을 고르게 나눠 섞음: 매번 큰 친구·작은 친구가 비슷한 비율로 나오도록
+    const spread = Array.from({ length: count }, (_, i) => (i + Math.random()) / count);
+    for (let i = spread.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [spread[i], spread[j]] = [spread[j], spread[i]];
+    }
+    spread.forEach((u, i) => crew.push(spawnGhost(layer, i, small, u)));
     setTimeout(onArrived, ((count - 1) * STAGGER + 1.5) * 1000);
 
     if (reduceMotion) return;
@@ -322,9 +328,9 @@
     requestAnimationFrame(tickCrew);
   }
 
-  function spawnGhost(layer, i, small) {
+  function spawnGhost(layer, i, small, u) {
     const [minSize, maxSize] = crewSizes();
-    const size = minSize + (maxSize - minSize) * Math.random() ** 1.7; // 고스트 몸통 너비(px), 작은 친구가 더 많게
+    const size = minSize + (maxSize - minSize) * u ** 1.3; // 고스트 몸통 너비(px), 작은 친구가 조금 더 많게
     const el = document.createElementNS(SVG_NS, "svg");
     el.setAttribute("class", "crew__ghost");
     el.setAttribute("viewBox", "-40 40 480 320"); // 기본 모양과 대시 모양이 모두 들어가는 영역, 중심 = 몸통 중심
@@ -348,7 +354,7 @@
     };
     el.style.width = `${g.w}px`;
     el.style.height = `${g.h}px`;
-    el.style.setProperty("--crew-body", size < (small ? 34 : 44) ? pick(CREW_COLORS.slice(2)) : "#ffffff"); // 작은 친구들은 보랏빛
+    el.style.setProperty("--crew-body", size < (small ? 38 : 50) ? pick(CREW_COLORS.slice(2)) : "#ffffff"); // 작은 친구들은 보랏빛
     layer.append(el);
 
     if (reduceMotion) {
