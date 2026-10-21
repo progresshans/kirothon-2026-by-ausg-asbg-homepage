@@ -620,13 +620,24 @@
   /* 장난: 지금 보고 있는 화면의 콘텐츠를 집어서 화면 밖으로 들고 감.
      반반 확률로 잠시 뒤 제자리에 돌려놓거나, 아예 가져가 버림(새로고침하면 돌아옴).
      원본은 자리를 지킨 채 숨기고(레이아웃 그대로), 똑같이 생긴 복제본을 고스트가 들고 다님 */
-  const LOOT = "h2, h3, p, li, img, dt, dd";
+  const LOOT = "h2, h3, p, li, img, dt, dd, .countdown > div";
   const LOOT_SKIP = ".nav, .marquee, .crew, .toast, .hero__ghost, .cta__ghost, [aria-hidden='true'], [data-reveal]";
   const INTERACTIVE = "a, button, summary, input, select, textarea, label";
   const stolen = new Set(); // 지금 들고 다니는 중
   const gone = new Set(); // 아예 가져가 버린 것
   const returnedAt = new WeakMap(); // 방금 돌려준 건 한동안 다시 안 훔침
   let lastHeist = -Infinity;
+
+  // 눈에 보이는 영역: 블록 요소는 글자가 짧아도 줄 전체 폭을 차지하므로(특히 모바일),
+  // 배경·테두리가 없으면 실제 글자가 차지하는 영역으로 판단
+  function visibleRect(el, cs) {
+    const boxed = cs.backgroundColor !== "rgba(0, 0, 0, 0)" || cs.backgroundImage !== "none" || parseFloat(cs.borderTopWidth) > 0;
+    if (el.tagName === "IMG" || boxed) return el.getBoundingClientRect();
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    const r = range.getBoundingClientRect();
+    return r.width ? r : el.getBoundingClientRect();
+  }
 
   function findLoot() {
     const vw = window.innerWidth;
@@ -635,11 +646,13 @@
       if (el.closest(LOOT_SKIP) || el.closest(INTERACTIVE) || el.querySelector(INTERACTIVE)) return false;
       if ([...stolen, ...gone].some((s) => s.contains(el) || el.contains(s))) return false;
       if (performance.now() - (returnedAt.get(el) ?? -Infinity) < 30000) return false;
-      const r = el.getBoundingClientRect();
-      if (r.width < 24 || r.height < 14 || r.width > vw * 0.65 || r.height > vh * 0.45) return false;
-      if (r.left < 8 || r.right > vw - 8 || r.top < 72 || r.bottom > vh - 8) return false; // 화면 안에 다 보이는 것만
       const cs = getComputedStyle(el);
-      return cs.visibility === "visible" && cs.display !== "none" && Number(cs.opacity) > 0.5;
+      if (cs.visibility !== "visible" || cs.display === "none" || Number(cs.opacity) < 0.5) return false;
+      const r = visibleRect(el, cs);
+      if (r.width < 24 || r.height < 14) return false;
+      if (r.height > vh * 0.45 || r.width * r.height > vw * vh * 0.22) return false; // 너무 큰 덩어리는 제외
+      if (r.left < 0 || r.right > vw || r.top < 72 || r.bottom > vh - 8) return false; // 화면 안에 다 보이는 것만
+      return true;
     });
     return list.length ? pick(list) : null;
   }
@@ -651,7 +664,7 @@
     if (!el) return drift(g);
     lastHeist = now;
     stolen.add(el);
-    const r = el.getBoundingClientRect();
+    const r = visibleRect(el, getComputedStyle(el)); // 고스트는 실제 글자가 있는 쪽으로 날아감
     const half = sizeOf(g) / 2;
     dash(g, [clamp(r.left + r.width * rand(0.25, 0.75), half, window.innerWidth - half), r.top - heightOf(g) * 0.12]);
     g.queue.push((g) => grab(g, el));
