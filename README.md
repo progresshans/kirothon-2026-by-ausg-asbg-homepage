@@ -47,9 +47,10 @@ FAQ 답변과 푸터의 주최(`AUSG × ASBG × AWSKRUG`)도 `index.html`에서 
 
 ### 주최 · 후원 로고
 
-`index.html`의 `06 PARTNERS` 섹션에 있고, 로고 파일은 `public/assets/img/partners/`에 있습니다.
+`index.html`의 `07 PARTNERS` 섹션에 있고, 로고 파일은 `public/assets/img/partners/`에 있습니다.
 어두운 배경용으로 배경을 투명하게 만든 흰색 버전이에요. ASBG 칩 로고는 HTML 안에 SVG로 직접 그려져 있습니다.
 AWS 로고는 현재 가이드에 맞춰 주황색 없이 흰색 단색으로 사용합니다.
+후원사의 Kiro 로고(`kiro.png`)는 고스트 + 워드마크가 들어간 흰색 가로형 로고예요. 더 큰 원본(SVG 등)을 받으면 같은 이름으로 교체하면 됩니다.
 
 ## 로컬에서 보기
 
