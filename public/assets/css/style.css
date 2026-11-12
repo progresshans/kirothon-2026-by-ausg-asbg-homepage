@@ -318,6 +318,14 @@ svg {
   z-index: 0;
   pointer-events: none;
   user-select: none;
+  transition: opacity 0.6s;
+}
+
+/* Kiro(고스트) 뒤에는 하프톤 문양이 보이면 안 됨 (Kiro 브랜드 가이드라인).
+   그래서 고스트가 있는 히어로·CTA에는 문양을 두지 않고,
+   Kiro Crew가 화면을 떠다니는 동안에는 남은 문양도 숨긴다 */
+body:has(.crew) .star {
+  opacity: 0;
 }
 
 .scribble {
@@ -678,19 +686,6 @@ svg {
   z-index: 1;
 }
 
-.star--hero-a {
-  width: min(30vw, 520px);
-  right: 1vw;
-  top: 38%;
-}
-
-.star--hero-b {
-  width: min(30vw, 500px);
-  right: 30vw;
-  bottom: -12vw;
-  transform: rotate(18deg);
-}
-
 /* ghost */
 .ghost {
   width: 100%;
@@ -869,20 +864,6 @@ svg {
   .sticker--sleep {
     left: -44%;
     top: 66%;
-  }
-
-  .star--hero-a {
-    width: min(70vw, 520px);
-    right: auto;
-    left: -22vw;
-    top: auto;
-    bottom: -4vw;
-  }
-
-  .star--hero-b {
-    width: min(58vw, 440px);
-    right: -18vw;
-    bottom: min(44vw, 320px);
   }
 }
 
@@ -2207,13 +2188,6 @@ svg {
   pointer-events: none;
 }
 
-.star--cta {
-  width: min(36vw, 520px);
-  right: -9vw;
-  bottom: -17vw;
-  transform: rotate(-20deg);
-}
-
 @media (max-width: 860px) {
   .cta__inner {
     grid-template-columns: 1fr;
@@ -2226,12 +2200,6 @@ svg {
   .cta__ghost {
     width: min(44vw, 240px);
     right: 8vw;
-  }
-
-  .star--cta {
-    width: 76vw;
-    right: -22vw;
-    bottom: -26vw;
   }
 }
 
@@ -2504,8 +2472,9 @@ svg {
   font-weight: 600;
 }
 
+/* 가로로 낮은 화면에서 문양이 고스트 뒤까지 올라오지 않도록 높이로도 제한 (Kiro 뒤에는 문양 X) */
 .lost .star {
-  width: min(70vw, 640px);
+  width: min(70vw, 640px, 80vh);
   left: -16vw;
   bottom: -14vw;
 }
