@@ -85,7 +85,8 @@
       nav.classList.toggle("is-visible", !entry.isIntersecting && entry.boundingClientRect.top < 0);
     }).observe(heroTitle);
 
-    const links = $$(".nav__links a");
+    // 페이지 안 섹션(#...) 링크만 스크롤 위치 표시 대상 (Gallery 같은 다른 페이지 링크는 제외)
+    const links = $$(".nav__links a").filter((a) => a.getAttribute("href").startsWith("#"));
     const sections = links.map((a) => $(a.getAttribute("href"))).filter(Boolean);
     const spy = new IntersectionObserver(
       (entries) => {

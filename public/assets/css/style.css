@@ -439,8 +439,13 @@ body:has(.crew) .star {
 }
 
 @media (max-width: 860px) {
-  .nav__links {
+  /* 좁은 화면에서는 Gallery 메뉴만 남김 */
+  .nav__links li:not(.nav__gallery) {
     display: none;
+  }
+
+  .nav__links {
+    margin: 0 0 0 auto;
   }
 
   .nav {
